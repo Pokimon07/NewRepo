@@ -1,0 +1,40 @@
+﻿@model IPagedList<CrudOperation.EntityModel.tbl_NimapTest>
+@{
+    ViewBag.Title = "ProductsList";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<table class="table table-hover">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.CategoryId</td>
+            <td>@item.CategoryName</td>
+            <td>
+                <a href="@Url.Action("AllProducts", new{ item.ProductId,item.ProductName,item.CategoryId,item.CategoryName})" , class="btn btn-success">Edit</a>
+                <a href="@Url.Action("DeleteProducts",new { item.ProductId })" class="btn btn-danger">DELETE</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, i => Url.Action("ProductsList", "Products", new { i, search = Request.QueryString["search"] }))
+
