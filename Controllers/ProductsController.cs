@@ -24,8 +24,9 @@ namespace CrudOperation.Controllers
         {
 
             tbl_NimapTest obj = new tbl_NimapTest();
-           
-                obj.ProductId = model.ProductId;
+         if(ModelState.IsValid)
+           {
+        obj.ProductId = model.ProductId;
             obj.ProductName = model.ProductName;
             obj.CategoryId = model.CategoryId;
             obj.CategoryName = model.CategoryName;
@@ -36,10 +37,15 @@ namespace CrudOperation.Controllers
                 dbObj.SaveChanges();
                 ViewBag.Message = "Data Inserted Successfully Click";
             }
+            else
+             {
+               dbObj.Entry(obj).State = EntityState.Modified;
+                }
+             }
+           
+                
 
-          
-
-            return View("AllProducts");
+         return View("AllProducts");
         }
 
       //  public ActionResult EditProduct(int id=0)
