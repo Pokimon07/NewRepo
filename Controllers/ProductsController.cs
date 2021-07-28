@@ -42,7 +42,7 @@ namespace CrudOperation.Controllers
                dbObj.Entry(obj).State = EntityState.Modified;
                 }
              }
-           
+           ModelState.Clear();
                 
 
          return View("AllProducts");
